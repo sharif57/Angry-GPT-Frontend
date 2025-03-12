@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import {  Prompt } from "next/font/google";
+import { Prompt } from "next/font/google";
 import "../globals.css";
 import { ThemeProvider } from "@/components/ui/theme-provider";
+import Navbar from "@/components/Navbar";
 
-const prompt = Prompt({ subsets: ["latin"], weight: ["400"] })
-
+const prompt = Prompt({ subsets: ["latin"], weight: ["400"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,8 +18,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-   <body  className={prompt.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+      <body className={prompt.className}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navbar></Navbar>
           {children}
         </ThemeProvider>
       </body>

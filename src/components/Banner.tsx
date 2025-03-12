@@ -3,12 +3,12 @@ import { Button } from "@/components/ui/button";
 
 export default function Banner() {
   return (
-    <main className="min-h-screen  to-lime-50/50 dark:to-lime-950/30">
+    <main className="  ">
       <div className="container mx-auto px-4 py-12 md:py-24">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Content */}
-          <div className="space-y-14">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+          <div className="lg:space-y-14 space-y-7">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight">
               Your Personal AI Chatbot Fun, Smart & Engaging!
             </h1>
 
@@ -18,17 +18,17 @@ export default function Banner() {
                 Featuring Unique Personalities like Angry GPT, Lola, and Mimi.
               </p>
 
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-4 justify-center sm:justify-start">
                 <Button
                   size="lg"
-                  className="rounded-full bg-[#CAEA31] hover:bg-[#CAEA31] text-black px-8"
+                  className="rounded-full bg-[#CAEA31] hover:bg-[#CAEA31] text-black px-8 w-full sm:w-auto"
                 >
                   Try For Free
                 </Button>
                 <Button
                   size="lg"
                   variant="outline"
-                  className="rounded-full px-8 border border-black"
+                  className="rounded-full px-8 border border-black w-full sm:w-auto"
                 >
                   Download Now
                 </Button>
@@ -50,8 +50,8 @@ export default function Banner() {
               </div>
             </div>
           </div>
-          <div className="relative h-[600px] md:h-[700px]">
-            <div className="absolute inset-0 bg-[url('/Ellipse.png')]  bottom-0 bg-no-repeat bg-right-top -top-64 -right-6" />
+          <div className="relative h-[400px] md:h-[700px]">
+            <div className="absolute inset-0 bg-[url('/Ellipse.png')]  lg:bottom-0 bg-no-repeat lg:bg-right-top -top-64 lg:-right-6" />
             <Image
               src="/mobile2.png"
               alt="Chat Interface"

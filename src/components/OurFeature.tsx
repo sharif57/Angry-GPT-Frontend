@@ -36,7 +36,7 @@ const features = [
 
 export default function OurFeature() {
   return (
-    <section className=" relative">
+    <section className=" relative ">
       <div className=" ">
         <div className="absolute inset-0  bg-[url('/Ellipse3.png')]  bg-no-repeat -top-28 "></div>
         <div className="container mx-auto px-4   ">
@@ -47,7 +47,7 @@ export default function OurFeature() {
               </span>
             </div>
 
-            <h2 className="text-3xl w-2/5 mx-auto md:text-4xl lg:text-5xl font-bold mb-4 leading-14">
+            <h2 className="text-2xl lg:w-2/5 mx-auto md:text-4xl lg:text-5xl font-bold mb-4 lg:leading-14">
               Smart, Fast & Engaging Our Top Features!
             </h2>
           </div>
