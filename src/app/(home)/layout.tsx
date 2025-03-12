@@ -3,6 +3,7 @@ import { Prompt } from "next/font/google";
 import "../globals.css";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import Navbar from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 
 const prompt = Prompt({ subsets: ["latin"], weight: ["400"] });
 
@@ -27,6 +28,7 @@ export default function RootLayout({
         >
           <Navbar></Navbar>
           {children}
+          <Footer></Footer>
         </ThemeProvider>
       </body>
     </html>
