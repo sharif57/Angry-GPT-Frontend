@@ -74,7 +74,7 @@ import Image from "next/image"
 export default function DownloadSection() {
   return (
     <section className="lg:py-16 md:py-24 relative ">
-      <div className="absolute inset-0  bg-[url('/Ellipse3.png')]  bg-no-repeat -top-80  "></div>
+      <div className=" inset-0  bg-[url('/Ellipse3.png')]  bg-no-repeat -top-80  "></div>
       <div className="container mx-auto px-4" >
         {/* Main Content */}
         <div className="rounded-[46px] overflow-hidden relative">

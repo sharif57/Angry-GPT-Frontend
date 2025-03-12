@@ -1,94 +1,5 @@
-// import Image from "next/image"
-// import { Input } from "@/components/ui/input"
-// import { Button } from "@/components/ui/button"
-// import { Facebook, Linkedin, Instagram } from "lucide-react"
 
-// export default function Footer() {
-//   return (
-//     <section className="relative bg-black py-16 overflow-hidden">
-//       <div className="container mx-auto px-4">
-//         <div className="grid lg:grid-cols-2 gap-8 items-center relative">
-//           {/* Left Column */}
-//           <div className="space-y-8 relative z-10">
-//             <h2 className="text-3xl md:text-4xl font-bold text-white">Get started today</h2>
 
-//             {/* Email Subscription */}
-// <div className="max-w-md">
-//   <div className="relative">
-//     <Input
-//       type="email"
-//       placeholder="Enter Your E-mail"
-//       className="w-full pl-4 pr-24 py-3 rounded-full bg-white text-black"
-//     />
-//     <Button className="absolute right-1 top-1 rounded-full bg-black hover:bg-black/90 text-white px-6">
-//       Subscribe
-//     </Button>
-//   </div>
-// </div>
-
-//             {/* Logo and Description */}
-// <div className="space-y-4">
-//   <div className="flex items-center gap-2">
-//     <div className="w-8 h-8 relative overflow-hidden rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500" />
-//     <span className="text-white font-bold text-xl">Angry GPT</span>
-//   </div>
-//   <p className="text-gray-400 max-w-md">
-//     Engage in Real Conversations with Our Cutting-Edge AI Chatbot, Featuring Unique Personalities like Angry
-//     GPT, Lola, and Mimi. Try It Now!
-//   </p>
-// </div>
-//   </div>
-
-//           {/* Right Column */}
-//   <div className="relative">
-//     {/* Robot Image */}
-//     <div className="relative w-[300px] h-[300px] mx-auto lg:ml-auto">
-//       <div className="absolute -top-28 -mt-14 right-0 w-full h-full">
-//         <div className="absolute inset-0 bg-lime-400/20 blur-3xl rounded-full" />
-//         <Image src="/footer2.png" alt="AI Robot" width={300} height={300} className="relative z-10" priority />
-//       </div>
-//     </div>
-
-//             {/* Social Links */}
-// <div className="text-center lg:text-right mt-8">
-//   <h3 className="text-white mb-4">Connect Us With</h3>
-//   <div className="flex items-center justify-center lg:justify-end gap-4">
-//     <a
-//       href="#"
-//       className="w-10 h-10 flex items-center justify-center rounded-full bg-[#1877F2] hover:opacity-90 transition-opacity"
-//     >
-//       <Facebook className="w-5 h-5 text-white" />
-//     </a>
-//     <a
-//       href="#"
-//       className="w-10 h-10 flex items-center justify-center rounded-full bg-[#0A66C2] hover:opacity-90 transition-opacity"
-//     >
-//       <Linkedin className="w-5 h-5 text-white" />
-//     </a>
-//     <a
-//       href="#"
-//       className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-r from-[#F58529] to-[#DD2A7B] hover:opacity-90 transition-opacity"
-//     >
-//       <Instagram className="w-5 h-5 text-white" />
-//     </a>
-//     <a
-//       href="#"
-//       className="w-10 h-10 flex items-center justify-center rounded-full bg-[#1DB954] hover:opacity-90 transition-opacity"
-//     >
-//       <svg viewBox="0 0 24 24" className="w-5 h-5 text-white" fill="currentColor">
-//         <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" />
-//       </svg>
-//     </a>
-//   </div>
-// </div>
-//           </div>
-//         </div>
-//       </div>
-//     </section>
-//   )
-// }
-
-import { Facebook, Instagram, Linkedin } from "lucide-react";
 import Image from "next/image";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -188,7 +99,7 @@ export function Footer() {
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <g clip-path="url(#clip0_2345_6002)">
+                  <g clipPath="url(#clip0_2345_6002)">
                     <path
                       d="M20 40.5C31.0457 40.5 40 31.5457 40 20.5C40 9.45431 31.0457 0.5 20 0.5C8.95431 0.5 0 9.45431 0 20.5C0 31.5457 8.95431 40.5 20 40.5Z"
                       fill="#0B69C7"
@@ -229,7 +140,7 @@ export function Footer() {
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <g clip-path="url(#clip0_2345_6002)">
+                  <g clipPath="url(#clip0_2345_6002)">
                     <path
                       d="M20 40.5C31.0457 40.5 40 31.5457 40 20.5C40 9.45431 31.0457 0.5 20 0.5C8.95431 0.5 0 9.45431 0 20.5C0 31.5457 8.95431 40.5 20 40.5Z"
                       fill="#0B69C7"
@@ -295,13 +206,13 @@ export function Footer() {
                       y2="7.30631"
                       gradientUnits="userSpaceOnUse"
                     >
-                      <stop stop-color="#FEE411" />
-                      <stop offset="0.052" stop-color="#FEDB16" />
+                      <stop stopColor="#FEE411" />
+                      <stop offset="0.052" stopColor="#FEDB16" />
                       <stop offset="0.138" stop-color="#FEC125" />
-                      <stop offset="0.248" stop-color="#FE983D" />
-                      <stop offset="0.376" stop-color="#FE5F5E" />
-                      <stop offset="0.5" stop-color="#FE2181" />
-                      <stop offset="1" stop-color="#9000DC" />
+                      <stop offset="0.248" stopColor="#FE983D" />
+                      <stop offset="0.376" stopColor="#FE5F5E" />
+                      <stop offset="0.5" stopColor="#FE2181" />
+                      <stop offset="1" stopColor="#9000DC" />
                     </linearGradient>
                   </defs>
                 </svg>

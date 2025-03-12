@@ -199,57 +199,60 @@ export default function Navbar() {
   return (
     <div className="sticky top-0 z-50 w-full ">
       <header className="mx-auto max-w-[1580px] px-6 lg:px-12 py-6 flex justify-between items-center">
-      <div className="flex items-center w-[754px] justify-between">
+        <div className="flex items-center w-[754px] justify-between">
           {/* Logo */}
-          <div className="flex items-center gap-4">
-          <Image
-            className="h-[40px] w-[23px]"
-            src={"/logo.svg"}
-            alt="logo"
-            height={100}
-            width={100}
-          />
-          <h1 className="lg:text-[24px] text-[18px] font-medium text-[#212121] dark:text-white">
-            Angry GPT
-          </h1>
-        </div>
+          <Link href={'/'}>
+            <div className="flex items-center gap-4">
+              <Image
+                className="h-[40px] w-[23px]"
+                src={"/logo.svg"}
+                alt="logo"
+                height={100}
+                width={100}
+              />
+              <h1 className="lg:text-[24px] text-[18px] font-medium text-[#212121] dark:text-white">
+                Angry GPT
+              </h1>
+            </div>
+          </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8">
-          <Link
-            href="/"
-            className="text-[18px] font-medium text-foreground hover:text-primary transition-colors"
-          >
-            Home
-          </Link>
-          <Link
-            href="/feature"
-            className="text-[18px] font-medium text-foreground hover:text-primary transition-colors"
-          >
-            Feature
-          </Link>
-          <Link
-            href="/how-it-works"
-            className="text-[18px] font-medium text-foreground hover:text-primary transition-colors"
-          >
-            How it Works
-          </Link>
-          <Button
-            variant="outline"
-            size="lg"
-            className="rounded-full border-[#B8D52D] flex items-center gap-2 text-foreground transition-colors duration-300"
-          >
-            <Image
-              className="size-[24px]"
-              src={"/bag-2.svg"}
-              height={100}
-              width={100}
-              alt="bag"
-            />
-            <span>Shop</span>
-          </Button>
-        </nav>
-      </div>
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-8">
+            <Link
+              href="/"
+              className="text-[18px] font-medium text-foreground hover:text-primary transition-colors"
+            >
+              Home
+            </Link>
+
+            <Link
+              href="/feature"
+              className="text-[18px] font-medium text-foreground hover:text-primary transition-colors"
+            >
+              Feature
+            </Link>
+            <Link
+              href="/how-it-works"
+              className="text-[18px] font-medium text-foreground hover:text-primary transition-colors"
+            >
+              How it Works
+            </Link>
+            <Button
+              variant="outline"
+              size="lg"
+              className="rounded-full border-[#B8D52D] flex items-center gap-2 text-foreground transition-colors duration-300"
+            >
+              <Image
+                className="size-[24px]"
+                src={"/bag-2.svg"}
+                height={100}
+                width={100}
+                alt="bag"
+              />
+              <span>Shop</span>
+            </Button>
+          </nav>
+        </div>
 
         {/* Actions */}
         <div className="flex items-center gap-3">

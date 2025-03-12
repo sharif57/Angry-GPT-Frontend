@@ -1,8 +1,8 @@
-
-'use client'
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
+"use client";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
 
 // Book data
 const books = [
@@ -54,23 +54,43 @@ const books = [
     price: 22,
     image: "/book.png",
   },
-]
+  {
+    id: 9,
+    title: "Killing Stalking Lola Season 1",
+    price: 22,
+    image: "/book.png",
+  },
+  {
+    id: 10,
+    title: "Killing Stalking Lola Season 1",
+    price: 22,
+    image: "/book.png",
+  },
+  {
+    id: 11,
+    title: "Killing Stalking Lola Season 1",
+    price: 22,
+    image: "/book.png",
+  },
+];
 
-export default function BookStore() {
+export default function AllBookStore() {
   return (
     <section className="py-8 sm:py-12 md:py-16 lg:py-24">
-      <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6">
+      <div className="w-full container mx-auto px-4 sm:px-6">
         {/* Header */}
-        <div className="text-center mb-8 sm:mb-12 md:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight max-w-4xl mx-auto">
-            Discover Our Latest Book Unlock the Knowledge and Stories
-          </h2>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
-            Browse through a range of exciting books and purchase your copy instantly. Dive into the world of
-            literature!
-          </p>
+        <div className="w-[292px]  pb-4">
+          <div className="relative">
+            <Input
+              type="email"
+              placeholder="Enter Your E-mail"
+              className="w-full pl-4 pr-24 py-6 px- rounded-lg bg-[#F1F1F1] "
+            />
+            <Button className="absolute right-1 top-1.5 bottom-2 py-5 rounded-full  text-white px-6">
+             <Search></Search>
+            </Button>
+          </div>
         </div>
-
         {/* Book Grid */}
         <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12">
           {books.map((book) => (
@@ -113,31 +133,7 @@ export default function BookStore() {
             </div>
           ))}
         </div>
-
-        <Link href="/allBook" passHref className="flex justify-end mb-8 sm:mb-12">
-          <Button
-            variant="outline"
-            className="rounded-full cursor-pointer px-6 sm:px-8 py-1.5 sm:py-2 border-[#000000] dark:border-[#CAEA31] hover:bg-lime-100 dark:hover:bg-lime-100 text-black dark:text-white transition-colors"
-          >
-            See All
-          </Button>
-        </Link>
-
-        {/* Spotify Button */}
-        <div className="flex justify-center">
-          <a
-            href="https://spotify.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transform hover:scale-105 transition-transform duration-300"
-          >
-            <div className="relative w-[200px] sm:w-[250px] md:w-[300px] h-[60px] sm:h-[80px]">
-              <Image src="/spotif.svg" fill alt="Listen on Spotify" className="object-contain" />
-            </div>
-          </a>
-        </div>
       </div>
     </section>
-  )
+  );
 }
-
