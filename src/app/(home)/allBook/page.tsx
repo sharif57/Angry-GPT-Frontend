@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
+import Link from "next/link";
 
 // Book data
 const books = [
@@ -94,7 +95,7 @@ export default function AllBookStore() {
         {/* Book Grid */}
         <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12">
           {books.map((book) => (
-            <div
+            <Link href={`allBook/${book.id}`}
               key={book.id}
               className="bg-card rounded-[20px] p-3 sm:p-4 transition-all hover:shadow-lg hover:translate-y-[-4px] bg-white dark:bg-white duration-300 border border-border/40"
             >
@@ -130,7 +131,7 @@ export default function AllBookStore() {
                   </Button>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
