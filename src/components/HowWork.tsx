@@ -26,9 +26,9 @@ export default function HowWork() {
             {/* Description */}
             <p className="text-lg md:text-xl text-muted-foreground dark:text-[#FFFFFF] mb-12 leading-relaxed">
               Unlock Instant Access to AI-Powered Conversations with Just a Few
-              Easy Steps! From Signing Up to Choosing Your AI Model, You&apos;ll Be
-              Talking to Our AI in No Time. Whether You're Enjoying Free Chats
-              or Unlocking Premium Features, It's All Set Up for You to Begin
+              Easy Steps! From Signing Up to Choosing Your AI Model, You ll Be
+              Talking to Our AI in No Time. Whether You are Enjoying Free Chats
+              or Unlocking Premium Features, It is All Set Up for You to Begin
               Right Away!
             </p>
 
