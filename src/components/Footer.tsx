@@ -1,5 +1,3 @@
-
-
 import Image from "next/image";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -7,7 +5,7 @@ import { Button } from "./ui/button";
 export function Footer() {
   return (
     // <Footer style={{ background: "#000000", padding: "60px 0 20px" }}>
-    <footer className="bg-[#101010]  ">
+    <footer className="bg-[#101010]">
       <div className="container mx-auto  px-2 lg:px-0">
         {/* Newsletter Section */}
         <div>
@@ -23,7 +21,7 @@ export function Footer() {
                   <Input
                     type="email"
                     placeholder="Enter Your E-mail"
-                    className="w-full pl-4 pr-24 py-6 px- rounded-full bg-white text-black"
+                    className="w-full pl-4 pr-24 py-6 px- rounded-full bg-white dark:bg-white text-black"
                   />
                   <Button className="absolute right-1 top-1.5 bottom-2 py-5 rounded-full bg-black hover:bg-black/90 text-white px-6">
                     Subscribe

@@ -19,7 +19,7 @@ export default function HowWork() {
             </div>
 
             {/* Heading */}
-            <h2 className="text-2xl md:text-5xl lg:text-6xl font-bold mb-8 leading-tight">
+            <h2 className="text-2xl md:text-5xl lg:text-6xl font-medium mb-8 leading-tight">
               Start Chatting in Just a Few Easy Steps!
             </h2>
 

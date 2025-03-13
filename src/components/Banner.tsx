@@ -8,7 +8,7 @@ export default function Banner() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Content */}
           <div className="lg:space-y-14 space-y-7">
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-semibold leading-tight">
               Your Personal AI Chatbot Fun, Smart & Engaging!
             </h1>
 
@@ -44,7 +44,7 @@ export default function Banner() {
                     src={"/users.png"}
                   ></Image>
                 </div>
-                <span className="font-medium text-[20px] text-[#4D4D4D]">
+                <span className="font-medium text-[20px] text-[#4D4D4D] dark:text-white">
                   2.4k Users
                 </span>
               </div>

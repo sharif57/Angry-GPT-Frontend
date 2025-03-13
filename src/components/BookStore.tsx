@@ -1,8 +1,7 @@
-
-'use client'
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
+"use client";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 // Book data
 const books = [
@@ -54,7 +53,7 @@ const books = [
     price: 22,
     image: "/book.png",
   },
-]
+];
 
 export default function BookStore() {
   return (
@@ -62,19 +61,20 @@ export default function BookStore() {
       <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12 md:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight max-w-4xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium mb-4 sm:mb-6 leading-tight max-w-4xl mx-auto">
             Discover Our Latest Book Unlock the Knowledge and Stories
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
-            Browse through a range of exciting books and purchase your copy instantly. Dive into the world of
-            literature!
+            Browse through a range of exciting books and purchase your copy
+            instantly. Dive into the world of literature!
           </p>
         </div>
 
         {/* Book Grid */}
         <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12">
           {books.map((book) => (
-            <div
+            <Link
+              href={`allBook/${book.id}`}
               key={book.id}
               className="bg-card rounded-[20px] p-3 sm:p-4 transition-all hover:shadow-lg hover:translate-y-[-4px] bg-white dark:bg-white duration-300 border border-border/40"
             >
@@ -110,11 +110,15 @@ export default function BookStore() {
                   </Button>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 
-        <Link href="/allBook" passHref className="flex justify-end mb-8 sm:mb-12">
+        <Link
+          href="/allBook"
+          passHref
+          className="flex justify-end mb-8 sm:mb-12"
+        >
           <Button
             variant="outline"
             className="rounded-full cursor-pointer px-6 sm:px-8 py-1.5 sm:py-2 border-[#000000] dark:border-[#CAEA31] hover:bg-lime-100 dark:hover:bg-lime-100 text-black dark:text-white transition-colors"
@@ -132,12 +136,16 @@ export default function BookStore() {
             className="transform hover:scale-105 transition-transform duration-300"
           >
             <div className="relative w-[200px] sm:w-[250px] md:w-[300px] h-[60px] sm:h-[80px]">
-              <Image src="/spotif.svg" fill alt="Listen on Spotify" className="object-contain" />
+              <Image
+                src="/spotif.svg"
+                fill
+                alt="Listen on Spotify"
+                className="object-contain"
+              />
             </div>
           </a>
         </div>
       </div>
     </section>
-  )
+  );
 }
-

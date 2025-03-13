@@ -434,7 +434,7 @@ export default function ProductDetail() {
             {product.author}
           </p>
 
-          <div className="text-2xl font-bold mb-6">
+          <div className="text-2xl font-medium mb-6">
             ${product.price.toFixed(2)}
           </div>
 

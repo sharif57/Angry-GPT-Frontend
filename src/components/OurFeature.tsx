@@ -47,7 +47,7 @@ export default function OurFeature() {
               </span>
             </div>
 
-            <h2 className="text-2xl lg:w-2/5 mx-auto md:text-4xl lg:text-5xl font-bold mb-4 lg:leading-14">
+            <h2 className="text-2xl lg:w-2/5 mx-auto md:text-4xl lg:text-5xl font-medium mb-4 lg:leading-14">
               Smart, Fast & Engaging Our Top Features!
             </h2>
           </div>

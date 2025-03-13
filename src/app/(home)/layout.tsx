@@ -5,7 +5,7 @@ import { ThemeProvider } from "@/components/ui/theme-provider";
 import Navbar from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
-const prompt = Prompt({ subsets: ["latin"], weight: ["400"] });
+const prompt = Prompt({ subsets: ["latin"], weight: ["400", '500', '700'] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
