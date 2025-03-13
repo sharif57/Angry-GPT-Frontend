@@ -80,7 +80,7 @@ export default function AllBookStore() {
     <section className="py-8 sm:py-12 md:py-16 lg:py-24">
       <div className="w-full container mx-auto px-4 sm:px-6">
         {/* Header */}
-        <div className="w-[292px]  pb-4">
+        {/* <div className="w-[292px]  pb-4">
           <div className="relative">
             <Input
               type="email"
@@ -88,14 +88,28 @@ export default function AllBookStore() {
               className="w-full pl-4 pr-24 py-6 px- rounded-lg bg-[#F1F1F1] "
             />
             <Button className="absolute right-1 top-1.5 bottom-2 py-5 rounded-full  text-white px-6">
-             <Search></Search>
+              <Search></Search>
             </Button>
           </div>
+        </div> */}
+        <div>
+          <div className="relative w-[292px] mb-4">
+            <Input
+              type="text"
+              placeholder="Search Book"
+              className="bg-[#F1F1F1] border text-black  placeholder:text-gray-400 pr-10 pl-4 w-full"
+            />
+            <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+              <Search className="h-5 w-5 text-black" />
+            </div>
+          </div>
         </div>
+
         {/* Book Grid */}
         <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12">
           {books.map((book) => (
-            <Link href={`allBook/${book.id}`}
+            <Link
+              href={`allBook/${book.id}`}
               key={book.id}
               className="bg-card rounded-[20px] p-3 sm:p-4 transition-all hover:shadow-lg hover:translate-y-[-4px] bg-white dark:bg-white duration-300 border border-border/40"
             >

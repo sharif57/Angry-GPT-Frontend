@@ -237,6 +237,7 @@ export default function Navbar() {
             >
               How it Works
             </Link>
+            <Link href={'/allBook'}>
             <Button
               variant="outline"
               size="lg"
@@ -251,6 +252,7 @@ export default function Navbar() {
               />
               <span>Shop</span>
             </Button>
+            </Link>
           </nav>
         </div>
 
