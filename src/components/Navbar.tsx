@@ -258,9 +258,11 @@ export default function Navbar() {
 
         {/* Actions */}
         <div className="flex items-center gap-3">
+          <Link href={'/cartpage'}>
           <Button className="rounded-full hidden sm:block bg-[#CAEA31] hover:bg-[#CAEA31] text-[#212121] font-medium">
             Download Now
           </Button>
+          </Link>
           <ThemeToggle />
         </div>
 

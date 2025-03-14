@@ -121,7 +121,7 @@ export default function BookStore() {
         >
           <Button
             variant="outline"
-            className="rounded-full cursor-pointer px-6 sm:px-8 py-1.5 sm:py-2 border-[#000000] dark:border-[#CAEA31] hover:bg-lime-100 dark:hover:bg-lime-100 text-black dark:text-white transition-colors"
+            className="rounded-full cursor-pointer px-6 sm:px-8 py-1.5 sm:py-2 border-[#000000] dark:border-[#CAEA31] text-black dark:text-white transition-colors"
           >
             See All
           </Button>
