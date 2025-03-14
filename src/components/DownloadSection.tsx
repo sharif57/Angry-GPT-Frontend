@@ -13,7 +13,7 @@ export default function DownloadSection() {
             <div className="grid lg:grid-cols-2 gap-12 items-center relative bg-black rounded-[46px] min-h-[400px] md:min-h-[500px]  ">
               {/* Left Column - Text and Download Buttons */}
               <div className="text-white space-y-8 max-w-5xl pt-8 px-8">
-                <h2 className="text-2xl md:text-4xl lg:text-[48px] font-bold leading-[1.2]">
+                <h2 className="text-xl md:text-4xl lg:text-[48px] font-medium leading-[1.2]">
                   Get Our App Today Your AI Chat Companion Awaits!
                 </h2>
 

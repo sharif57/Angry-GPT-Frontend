@@ -57,8 +57,8 @@ const books = [
 
 export default function BookStore() {
   return (
-    <section className="py-8 sm:py-12 md:py-16 lg:py-24">
-      <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6">
+    <section className="py-8 sm:py-12 md:py-16 lg:py-24 ">
+      <div className="w-full container mx-auto px-4 sm:px-6 ">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12 md:mb-16">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium mb-4 sm:mb-6 leading-tight max-w-4xl mx-auto">
