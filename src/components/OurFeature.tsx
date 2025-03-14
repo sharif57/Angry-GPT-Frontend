@@ -67,7 +67,7 @@ export default function OurFeature() {
                   />
                 </div>
 
-                <h3 className={`text-lg font-semibold mb-2 ${feature.color}`}>
+                <h3 className={`text-[24px] font-medium mb-2 text-[#CAEA31]`}>
                   {feature.title}
                 </h3>
 

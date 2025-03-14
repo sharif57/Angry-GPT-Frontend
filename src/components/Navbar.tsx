@@ -258,13 +258,15 @@ export default function Navbar() {
 
         {/* Actions */}
         <div className="flex items-center gap-3 justify-between">
-          <Image
-            src={"/users.svg"}
-            height={52}
-            width={52}
-            className="size-9 hidden sm:block"
-            alt="users"
-          ></Image>
+          <Link href={'/myprofile'}>
+            <Image
+              src={"/users.svg"}
+              height={52}
+              width={52}
+              className="size-9 hidden sm:block"
+              alt="users"
+            ></Image>
+          </Link>
           <ThemeToggle />
           <Link href={"/cartpage"}>
             <Button className="rounded-full hidden sm:block bg-[#CAEA31] hover:bg-[#CAEA31] text-[#212121] font-medium">
@@ -302,20 +304,20 @@ export default function Navbar() {
       >
         <div className="w-64 bg-background h-full shadow-lg p-6 flex flex-col">
           <div className="flex justify-between items-center">
-          <Link href={"/"}>
-            <div className="flex items-center gap-4">
-              <Image
-                className="h-[40px] w-[23px]"
-                src={"/logo.svg"}
-                alt="logo"
-                height={100}
-                width={100}
-              />
-              <h1 className="lg:text-[24px] text-[18px] font-medium text-[#212121] dark:text-white">
-                Angry GPT
-              </h1>
-            </div>
-          </Link>
+            <Link href={"/"}>
+              <div className="flex items-center gap-4">
+                <Image
+                  className="h-[40px] w-[23px]"
+                  src={"/logo.svg"}
+                  alt="logo"
+                  height={100}
+                  width={100}
+                />
+                <h1 className="lg:text-[24px] text-[18px] font-medium text-[#212121] dark:text-white">
+                  Angry GPT
+                </h1>
+              </div>
+            </Link>
             <Button
               variant="ghost"
               size="icon"
@@ -333,14 +335,14 @@ export default function Navbar() {
               Home
             </Link>
             <Link
-              href="/feature"
+              href="/"
               className="text-[18px] font-medium text-[#4D4D4D] dark:text-[#FFFFFF] hover:text-primary transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               Feature
             </Link>
             <Link
-              href="/how-it-works"
+              href="/"
               className="text-[18px] font-medium text-[#4D4D4D] dark:text-[#FFFFFF] hover:text-primary transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
