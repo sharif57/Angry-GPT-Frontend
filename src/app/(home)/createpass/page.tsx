@@ -35,7 +35,7 @@ export default function ResetPassword() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen  ">
+    <div className="flex items-center justify-center min-h-screen  px-2">
       <div className="w-full max-w-md p-6 bg-[#212121] rounded-lg shadow-lg py-12">
 
         <form onSubmit={handleSubmit} className="space-y-4">

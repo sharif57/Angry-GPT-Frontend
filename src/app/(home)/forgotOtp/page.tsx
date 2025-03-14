@@ -90,7 +90,7 @@ export default function EmailVerify() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex items-center justify-center min-h-screen px-2">
       <div className="w-full max-w-md p-6 bg-[#1a1a1a] rounded-lg shadow-lg py-10">
         <div className="flex items-center gap-4 justify-center mb-8">
           {[0, 1, 2, 3, 4].map((index) => (

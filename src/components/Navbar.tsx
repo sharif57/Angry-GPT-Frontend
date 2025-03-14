@@ -201,7 +201,7 @@ export default function Navbar() {
       <header className="mx-auto max-w-[1580px] px-6 lg:px-12 py-6 flex justify-between items-center">
         <div className="flex items-center w-[754px] justify-between">
           {/* Logo */}
-          <Link href={'/'}>
+          <Link href={"/"}>
             <div className="flex items-center gap-4">
               <Image
                 className="h-[40px] w-[23px]"
@@ -220,55 +220,70 @@ export default function Navbar() {
           <nav className="hidden md:flex items-center gap-8">
             <Link
               href="/"
-              className="text-[18px] font-medium text-foreground hover:text-primary transition-colors"
+              className="text-[18px] font-medium text-[#4D4D4D]  dark:text-[#FFFFFF]  hover:text-primary transition-colors"
             >
               Home
             </Link>
 
             <Link
-              href="/feature"
-              className="text-[18px] font-medium text-foreground hover:text-primary transition-colors"
+              href="/"
+              className="text-[18px] font-medium text-[#4D4D4D] dark:text-[#FFFFFF] hover:text-primary transition-colors"
             >
               Feature
             </Link>
             <Link
-              href="/how-it-works"
-              className="text-[18px] font-medium text-foreground hover:text-primary transition-colors"
+              href="/"
+              className="text-[18px] font-medium text-[#4D4D4D] dark:text-[#FFFFFF] hover:text-primary transition-colors"
             >
               How it Works
             </Link>
-            <Link href={'/allBook'}>
-            <Button
-              variant="outline"
-              size="lg"
-              className="rounded-full border-[#B8D52D] flex items-center gap-2 text-foreground transition-colors duration-300"
-            >
-              <Image
-                className="size-[24px]"
-                src={"/bag-2.svg"}
-                height={100}
-                width={100}
-                alt="bag"
-              />
-              <span>Shop</span>
-            </Button>
+            <Link href="/allBook" className="rounded-full">
+              <Button
+                variant="outline"
+                size="lg"
+                className="rounded-full border-[#B8D52D] flex items-center gap-2 transition-colors duration-300 bg-[#CAEA31] dark:bg-transparent text-[#212121] dark:text-white"
+              >
+                <Image
+                  className="size-[24px] "
+                  src="/bag-2.svg"
+                  height={100}
+                  width={100}
+                  alt="bag"
+                />
+                <span>Shop</span>
+              </Button>
             </Link>
           </nav>
         </div>
 
         {/* Actions */}
-        <div className="flex items-center gap-3">
-          <Link href={'/cartpage'}>
-          <Button className="rounded-full hidden sm:block bg-[#CAEA31] hover:bg-[#CAEA31] text-[#212121] font-medium">
-            Download Now
-          </Button>
-          </Link>
+        <div className="flex items-center gap-3 justify-between">
+          <Image
+            src={"/users.svg"}
+            height={52}
+            width={52}
+            className="size-9 hidden sm:block"
+            alt="users"
+          ></Image>
           <ThemeToggle />
+          <Link href={"/cartpage"}>
+            <Button className="rounded-full hidden sm:block bg-[#CAEA31] hover:bg-[#CAEA31] text-[#212121] font-medium">
+              Download Now
+            </Button>
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="md:hidden flex items-center">
+        <div className="md:hidden flex items-center px-4 gap-2">
           {/* <ThemeToggle /> */}
+          <Image
+            src={"/users.svg"}
+            height={52}
+            width={52}
+            className="size-9 "
+            alt="users"
+          ></Image>
+
           <Button
             variant="ghost"
             size="icon"
@@ -287,7 +302,20 @@ export default function Navbar() {
       >
         <div className="w-64 bg-background h-full shadow-lg p-6 flex flex-col">
           <div className="flex justify-between items-center">
-            <h2 className="text-lg font-semibold">Menu</h2>
+          <Link href={"/"}>
+            <div className="flex items-center gap-4">
+              <Image
+                className="h-[40px] w-[23px]"
+                src={"/logo.svg"}
+                alt="logo"
+                height={100}
+                width={100}
+              />
+              <h1 className="lg:text-[24px] text-[18px] font-medium text-[#212121] dark:text-white">
+                Angry GPT
+              </h1>
+            </div>
+          </Link>
             <Button
               variant="ghost"
               size="icon"
@@ -299,26 +327,26 @@ export default function Navbar() {
           <nav className="mt-6 flex flex-col space-y-4">
             <Link
               href="/"
-              className="text-[18px] font-medium text-foreground hover:text-primary transition-colors"
+              className="text-[18px] font-medium text-[#4D4D4D] dark:text-[#FFFFFF] hover:text-primary transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               Home
             </Link>
             <Link
               href="/feature"
-              className="text-[18px] font-medium text-foreground hover:text-primary transition-colors"
+              className="text-[18px] font-medium text-[#4D4D4D] dark:text-[#FFFFFF] hover:text-primary transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               Feature
             </Link>
             <Link
               href="/how-it-works"
-              className="text-[18px] font-medium text-foreground hover:text-primary transition-colors"
+              className="text-[18px] font-medium text-[#4D4D4D] dark:text-[#FFFFFF] hover:text-primary transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               How it Works
             </Link>
-            <Button className="rounded-full hidden sm:block bg-[#CAEA31] hover:bg-[#CAEA31] text-[#212121] font-medium">
+            <Button className="rounded-full bottom-0 top-0  bg-[#CAEA31] hover:bg-[#CAEA31] text-[#212121] font-medium">
               Download Now
             </Button>
           </nav>
