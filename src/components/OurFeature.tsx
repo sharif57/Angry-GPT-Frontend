@@ -36,9 +36,9 @@ const features = [
 
 export default function OurFeature() {
   return (
-    <section className=" relative ">
+    <section className=" relative lg:h-[600px]">
       <div className=" ">
-        <div className="absolute inset-0  bg-[url('/Ellipse3.png')]  bg-no-repeat -top-28 "></div>
+        <div className="absolute inset-0  bg-[url('/Ellipse3.png')]  bg-no-repeat -top-44  "></div>
         <div className="container mx-auto px-4   ">
           <div className="text-center mb-16">
             <div className="inline-block px-4 py-2 mb-6 rounded-full  dark:bg- border border-lime-200 dark:border-lime-700">
