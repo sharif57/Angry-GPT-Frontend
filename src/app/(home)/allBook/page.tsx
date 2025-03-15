@@ -140,7 +140,7 @@ export default function AllBookStore() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-1">
                       <h1 className="text-black text-base sm:text-[20px]">$</h1>
-                      <span className="text-xl sm:text-2xl md:text-[32px] font-semibold dark:text-black">
+                      <span className="text-xl sm:text-2xl md:text-[32px] font-medium dark:text-black">
                         {book.price}
                       </span>
                     </div>
