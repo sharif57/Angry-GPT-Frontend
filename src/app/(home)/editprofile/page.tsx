@@ -2,10 +2,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 
-export default function myProfile() {
+export default function editprofile() {
   return (
     <div className="container mx-auto lg:px-24 px-2  h-screen lg:mt-[100px] mt-[50px]">
         <h1 className="text-[20px] font-medium pb-8">Account Details</h1>
@@ -26,7 +25,6 @@ export default function myProfile() {
           <Label>Name</Label>
           <Input
             placeholder="Enter name"
-            readOnly
             className="dark:border-white border-black py-[10px] placeholder-black dark:placeholder-[#ffffff]"
           />
         </div>
@@ -34,13 +32,12 @@ export default function myProfile() {
           <Label>Phone Number</Label>
           <Input
             placeholder="Phone Number"
-            readOnly
             className="dark:border-white border-black py-[10px] text-white placeholder-black dark:placeholder-[#ffffff]"
           />
         </div>
-        <Link href={`/editprofile`} className="flex justify-end mt-12">
-            <Button className="text-black bg-[#CAEA31] px-20 py-[10px] rounded-full hover:text-white hover:dark:text-black">Edit </Button>
-        </Link>
+        <div className="flex justify-end mt-12">
+            <Button className="text-black bg-[#CAEA31] px-20 py-[10px] rounded-full hover:text-white hover:dark:text-black">Save Change </Button>
+        </div>
       </div>
       
     </div>
