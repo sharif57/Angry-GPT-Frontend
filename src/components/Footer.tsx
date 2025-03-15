@@ -5,9 +5,7 @@ import { Button } from "./ui/button";
 export function Footer() {
   return (
     <footer className="bg-[#101010] relative ">
-      <div className="absolute inset-0 bg-[url('/image.png')] bg-no-repeat   -top-[500px] z-10 left-[800px]">
-      
-      </div>
+      <div className="absolute inset-0 bg-[url('/image.png')] bg-no-repeat   top-[500px]  left-[800px]"></div>
 
       <div className="container mx-auto  px-2 lg:px-0">
         {/* Newsletter Section */}
