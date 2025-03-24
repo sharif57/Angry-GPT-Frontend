@@ -10,7 +10,7 @@ export default function Home() {
       <Banner />
       <OurFeature></OurFeature>
       <HowWork></HowWork>
-      <BookStore></BookStore>
+      <BookStore ></BookStore>
       <DownloadSection/>
     </div>
   );

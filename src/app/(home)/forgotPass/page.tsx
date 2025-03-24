@@ -6,15 +6,59 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Mail } from "lucide-react";
-import Link from "next/link";
+import { useForgotPasswordMutation } from "@/redux/feature/authSlice";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 export default function ForgotPassword() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
+  const [forgotPassword] = useForgotPasswordMutation();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle sending OTP here
-    console.log("Sending OTP to:", email);
+
+    try {
+      const response = await forgotPassword({
+        email,
+      }).unwrap();
+
+      console.log(response);
+
+      if (response.message) {
+        // Save tokens and user data to localStorage and cookies
+
+        // Show success toast notification
+        toast.success(response.message || "Login Successful!", {
+          autoClose: 1000,
+        });
+
+        // Redirect to the home page
+        setTimeout(() => {
+          // router.push("/forgotOtp");
+          router.push(`/forgotOtp?email=${email}`); // Pass email to OTP page
+        }, 1500); // Redirect after 1.5 seconds
+      } else {
+        toast.error(response.message || "Invalid credentials!");
+      }
+    } catch (error: unknown) {
+      console.error("Login error:", error);
+      if (
+        error &&
+        typeof error === "object" &&
+        "data" in error &&
+        typeof error.data === "object" &&
+        error.data &&
+        "message" in error.data
+      ) {
+        toast.error(
+          (error.data as { message: string }).message ||
+            "Something went wrong. Try again!"
+        );
+      } else {
+        toast.error("Something went wrong. Try again!");
+      }
+    }
   };
 
   return (
@@ -40,14 +84,14 @@ export default function ForgotPassword() {
             />
           </div>
 
-          <Link href={'/forgotOtp'}>
-            <Button
-              type="submit"
-              className="w-full py-6 bg-[#CAEA31] hover:bg-[#CAEA31] text-black font-medium rounded-full"
-            >
-              Send OTP
-            </Button>
-          </Link>
+          {/* <Link href={'/forgotOtp'}> */}
+          <Button
+            type="submit"
+            className="w-full py-6 bg-[#CAEA31] hover:bg-[#CAEA31] text-black font-medium rounded-full"
+          >
+            Send OTP
+          </Button>
+          {/* </Link> */}
         </form>
       </div>
     </div>

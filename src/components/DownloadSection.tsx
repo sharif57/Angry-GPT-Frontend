@@ -4,7 +4,7 @@ import Image from "next/image"
 
 export default function DownloadSection() {
   return (
-    <section className="lg:py-16 md:py-24 relative ">
+    <section id="works" className="lg:py-16 md:py-24 relative ">
       <div className=" inset-0  bg-[url('/Ellipse3.png')]  bg-no-repeat -top-80  "></div>
       <div className="container mx-auto px-4" >
         {/* Main Content */}
@@ -20,7 +20,7 @@ export default function DownloadSection() {
                 <div className="flex flex-wrap gap-6 pt-4">
                   {/* Google Play Button */}
                   <a
-                    href="#"
+                    href="https://play.google.com/store/apps"
                     className="transition-transform hover:scale-105 duration-300"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -36,7 +36,7 @@ export default function DownloadSection() {
 
                   {/* App Store Button */}
                   <a
-                    href="#"
+                    href="https://www.apple.com/app-store/developing-for-the-app-store/"
                     className="transition-transform hover:scale-105 duration-300"
                     target="_blank"
                     rel="noopener noreferrer"

@@ -7,13 +7,27 @@ import {
   useEffect,
   type KeyboardEvent,
   type ClipboardEvent,
+  Suspense,
 } from "react";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { useVerifyEmailMutation } from "@/redux/feature/authSlice";
+import { toast } from "react-toastify";
+import { useRouter, useSearchParams } from "next/navigation";
 
-export default function EmailVerify() {
+interface VerifyEmailPayload {
+  email: string;
+  otp: number;
+}
+
+function ForgotOtps() {
   const [otp, setOtp] = useState<string[]>(Array(5).fill(""));
+  const router = useRouter();
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const searchParams = useSearchParams();
+  const email = searchParams?.get("email") ?? null;
+  console.log(email);
+
+  const [verifyEmail] = useVerifyEmailMutation();
 
   // Initialize refs array
   useEffect(() => {
@@ -83,17 +97,47 @@ export default function EmailVerify() {
   };
 
   // Handle verification
-  const handleVerify = () => {
-    const otpValue = otp.join("");
-    console.log("Verifying OTP:", otpValue);
-    // Add your verification logic here
+
+  const handleVerify = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    const otpNumber = otp.join("");
+
+    if (otpNumber.length !== 6 || isNaN(Number(otpNumber))) {
+      toast.error("Please enter a valid 6-digit OTP.");
+      return;
+    }
+
+    if (!email) {
+      toast.error("Email is missing. Please try again.");
+      return;
+    }
+
+    try {
+      const payload: VerifyEmailPayload = {
+        email,
+        otp: Number(otpNumber),
+      };
+
+      const result = await verifyEmail(payload).unwrap();
+
+      if (result) {
+        toast.success("Email verified successfully!");
+        localStorage.setItem("token", result.data?.token);
+        localStorage.setItem("user", JSON.stringify(result.data?.user));
+        router.push("/createpass");
+      }
+    } catch (error) {
+      toast.error("Failed to verify email. Please try again.");
+      console.error("Error verifying email:", error);
+    }
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen px-2">
       <div className="w-full max-w-md p-6 bg-[#1a1a1a] rounded-lg shadow-lg py-10">
         <div className="flex items-center gap-4 justify-center mb-8">
-          {[0, 1, 2, 3, 4].map((index) => (
+          {[0, 1, 2, 3, 4, 5].map((index) => (
             <div key={index} className="relative">
               <input
                 ref={(el) => {
@@ -113,16 +157,24 @@ export default function EmailVerify() {
         </div>
 
         <div className="px-8">
-          <Link href={'/createpass'}>
-            <Button
-              className="w-full py-6 mb-4 bg-[#CAEA31] hover:bg-[#CAEA31] text-black font-medium rounded-full"
-              onClick={handleVerify}
-            >
-              Verify
-            </Button>
-          </Link>
+          {/* <Link href={'/createpass'}> */}
+          <Button
+            className="w-full py-6 mb-4 bg-[#CAEA31] hover:bg-[#CAEA31] text-black font-medium rounded-full"
+            onClick={handleVerify}
+          >
+            Verify
+          </Button>
+          {/* </Link> */}
         </div>
       </div>
     </div>
+  );
+}
+
+export default function VerifyEmails() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ForgotOtps />
+    </Suspense>
   );
 }

@@ -36,7 +36,7 @@ const features = [
 
 export default function OurFeature() {
   return (
-    <section className=" relative lg:h-[600px]">
+    <section id="feature" className=" relative lg:h-[600px]">
       <div className=" ">
         <div className="absolute inset-0  bg-[url('/Ellipse3.png')]  bg-no-repeat -top-44  "></div>
         <div className="container mx-auto px-4   ">

@@ -2,60 +2,26 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useAllBooksGetQuery } from "@/redux/feature/bookSlice";
 
-// Book data
-const books = [
-  {
-    id: 1,
-    title: "Killing Stalking Lola Season 1",
-    price: 22,
-    image: "/book.png",
-  },
-  {
-    id: 2,
-    title: "Killing Stalking Lola Season 1",
-    price: 22,
-    image: "/book.png",
-  },
-  {
-    id: 3,
-    title: "Killing Stalking Lola Season 1",
-    price: 22,
-    image: "/book.png",
-  },
-  {
-    id: 4,
-    title: "Killing Stalking Lola Season 1",
-    price: 22,
-    image: "/book.png",
-  },
-  {
-    id: 5,
-    title: "Killing Stalking Lola Season 1",
-    price: 22,
-    image: "/book.png",
-  },
-  {
-    id: 6,
-    title: "Killing Stalking Lola Season 1",
-    price: 22,
-    image: "/book.png",
-  },
-  {
-    id: 7,
-    title: "Killing Stalking Lola Season 1",
-    price: 22,
-    image: "/book.png",
-  },
-  {
-    id: 8,
-    title: "Killing Stalking Lola Season 1",
-    price: 22,
-    image: "/book.png",
-  },
-];
+interface Book {
+  _id: string;
+  title: string;
+  author: string;
+  description: string;
+  price: number;
+  stock: number;
+  images: string[];
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
 
 export default function BookStore() {
+  const { data } = useAllBooksGetQuery({ limit: 8, state: "published" });
+  // console.log(data?.data, "books");
+
+  const IMAGE = process.env.NEXT_PUBLIC_API_KEY
   return (
     <section className="py-8 sm:py-12 md:py-16 lg:py-24 ">
       <div className="w-full container mx-auto px-4 sm:px-6 ">
@@ -72,21 +38,21 @@ export default function BookStore() {
 
         {/* Book Grid */}
         <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12">
-          {books.map((book) => (
+          {data?.data.map((book: Book) => (
             <Link
-              href={`allBook/${book.id}`}
-              key={book.id}
+              href={`allBook/${book._id}`}
+              key={book._id}
               className="bg-card rounded-[20px] p-3 sm:p-4 transition-all hover:shadow-lg hover:translate-y-[-4px] bg-white dark:bg-white duration-300 border border-border/40"
             >
               {/* Book Image */}
               <div className="relative aspect-[5/4] mb-3 sm:mb-4 rounded-md overflow-hidden">
                 <Image
-                  src={book.image || "/placeholder.svg"}
+                  src={`${IMAGE}/${book.images[0]}` || "/placeholder.svg"}
                   alt={book.title}
                   fill
                   className="object-cover object-center"
                   sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  priority={book.id <= 4}
+                  // priority={book._id <= 4}
                 />
               </div>
 

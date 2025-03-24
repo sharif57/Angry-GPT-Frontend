@@ -4,26 +4,47 @@ import type React from "react";
 
 import { useState } from "react";
 import Image from "next/image";
-import { Eye, EyeOff, Lock, Mail, MinusIcon, PlusIcon } from "lucide-react";
+import { MinusIcon, PlusIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { useParams } from "next/navigation";
+import {
+  useAllBooksGetQuery,
+  useBooksDetailGetQuery,
+} from "@/redux/feature/bookSlice";
+import Login from "@/components/Login";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
-// Product data
-const product = {
-  title: "The Future of AI Conversations",
-  description:
-    "Explore the evolution of AI chat technology and how it transforms the way we communicate",
-  author: "John Doe",
-  price: 44.0,
-  images: ["/book.png", "/mobiles.png", "/book.png", "/book.png"],
-};
+interface Book {
+  _id: string;
+  title: string;
+  author: string;
+  description: string;
+  price: number;
+  stock: number;
+  images: string[];
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
 
 export default function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const params = useParams();
+  const id = params?.id;
+  console.log(id, "id");
+
+  const { data } = useBooksDetailGetQuery(id);
+  console.log(data?.data, "books");
+  const { data: allBook } = useAllBooksGetQuery({
+    limit: 4,
+    state: "published",
+  });
+
+  const singleBook = data?.data;
 
   const incrementQuantity = () => {
     setQuantity((prev) => prev + 1);
@@ -33,11 +54,11 @@ export default function ProductDetail() {
     setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
   };
 
-  const [showPassword, setShowPassword] = useState(false);
+  // const [showPassword, setShowPassword] = useState(false);
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+  // const togglePasswordVisibility = () => {
+  //   setShowPassword(!showPassword);
+  // };
 
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number.parseInt(e.target.value);
@@ -56,104 +77,45 @@ export default function ProductDetail() {
     // Here you would implement your checkout functionality
   };
 
-  const books = [
-    {
-      id: 1,
-      title: "Killing Stalking Lola Season 1",
-      price: 22,
-      image: "/book.png",
-    },
-    {
-      id: 2,
-      title: "Killing Stalking Lola Season 1",
-      price: 22,
-      image: "/book.png",
-    },
-    {
-      id: 3,
-      title: "Killing Stalking Lola Season 1",
-      price: 22,
-      image: "/book.png",
-    },
-    {
-      id: 4,
-      title: "Killing Stalking Lola Season 1",
-      price: 22,
-      image: "/book.png",
-    },
-    {
-      id: 5,
-      title: "Killing Stalking Lola Season 1",
-      price: 22,
-      image: "/book.png",
-    },
-    {
-      id: 6,
-      title: "Killing Stalking Lola Season 1",
-      price: 22,
-      image: "/book.png",
-    },
-    {
-      id: 7,
-      title: "Killing Stalking Lola Season 1",
-      price: 22,
-      image: "/book.png",
-    },
-    {
-      id: 8,
-      title: "Killing Stalking Lola Season 1",
-      price: 22,
-      image: "/book.png",
-    },
-    {
-      id: 9,
-      title: "Killing Stalking Lola Season 1",
-      price: 22,
-      image: "/book.png",
-    },
-    {
-      id: 10,
-      title: "Killing Stalking Lola Season 1",
-      price: 22,
-      image: "/book.png",
-    },
-    {
-      id: 11,
-      title: "Killing Stalking Lola Season 1",
-      price: 22,
-      image: "/book.png",
-    },
-  ];
+  const IMAGE = process.env.NEXT_PUBLIC_API_KEY;
 
   return (
     <div>
       <div className="flex flex-col md:flex-row gap-8 py-8 container mx-auto px-8">
         <div className="flex md:w-1/2">
-          <div className="hidden sm:flex flex-col gap-4 mr-4">
-            {product.images.slice(1).map((image, index) => (
-              <div
-                key={index}
-                className={`size-[144px] border rounded cursor-pointer overflow-hidden ${
-                  selectedImage === index + 1
-                    ? "border-primary border-2"
-                    : "border-gray-200"
-                }`}
-                onClick={() => setSelectedImage(index + 1)}
-              >
-                <Image
-                  src={image || "/placeholder.svg"}
-                  alt={`Product thumbnail ${index + 1}`}
-                  width={100}
-                  height={150}
-                  className="object-cover w-full h-full"
-                />
-              </div>
-            ))}
-          </div>
+          {/* Thumbnails for additional images (hidden if there's only one image) */}
+          {singleBook?.images?.length > 1 && (
+            <div className="hidden sm:flex flex-col gap-4 mr-4">
+              {singleBook.images.map((image: string, index: number) => (
+                <div
+                  key={index}
+                  className={`size-[144px] border rounded cursor-pointer overflow-hidden ${
+                    selectedImage === index
+                      ? "border-primary border-2"
+                      : "border-gray-200"
+                  }`}
+                  onClick={() => setSelectedImage(index)}
+                >
+                  <Image
+                    src={`${IMAGE}/${image}` || "/placeholder.svg"}
+                    alt={`Product thumbnail ${index + 1}`}
+                    width={100}
+                    height={150}
+                    className="object-cover w-full h-full"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Main image display */}
           <div className="flex-1 bg-[#EAEAEA] rounded-md p-4 flex items-center justify-center">
             <div className="relative w-full max-w-md aspect-[3/4]">
               <Image
-                src={product.images[selectedImage] || "/placeholder.svg"}
+                src={
+                  `${IMAGE}/${singleBook?.images[selectedImage]}` ||
+                  "/placeholder.svg"
+                }
                 alt="Product main image"
                 fill
                 className="object-contain"
@@ -163,17 +125,17 @@ export default function ProductDetail() {
         </div>
 
         <div className="md:w-1/2 lg:pl-10">
-          <h1 className="text-3xl font-medium mb-2">{product.title}</h1>
+          <h1 className="text-3xl font-medium mb-2">{singleBook?.title}</h1>
           <p className="text-gray-600 mb-4 lg:w-3/4 dark:text-white">
-            {product.description}
+            {singleBook?.description}
           </p>
           <p className="mb-6">
             <span className="text-gray-600 dark:text-white">Author:</span>{" "}
-            {product.author}
+            {singleBook?.author}
           </p>
 
           <div className="text-2xl font-medium mb-6">
-            ${product.price.toFixed(2)}
+            ${singleBook?.price.toFixed(2)}
           </div>
 
           <div className="flex items-center mb-6">
@@ -221,6 +183,7 @@ export default function ProductDetail() {
           </div>
         </div>
       </div>
+
       <section className="py-8 sm:py-12 md:py-16 lg:py-24">
         <div className="w-full container mx-auto px-4 sm:px-6">
           {/* Header */}
@@ -229,21 +192,21 @@ export default function ProductDetail() {
           </h1>
           {/* Book Grid */}
           <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12">
-            {books.slice(0, 4).map((book) => (
+            {allBook?.data.map((book: Book) => (
               <Link
-                href={`/allBook/${book.id}`}
-                key={book.id}
+                href={`/allBook/${book._id}`}
+                key={book._id}
                 className="bg-card rounded-[20px] p-3 sm:p-4 transition-all hover:shadow-lg hover:translate-y-[-4px] bg-white dark:bg-white duration-300 border border-border/40"
               >
                 {/* Book Image */}
                 <div className="relative aspect-[5/4] mb-3 sm:mb-4 rounded-md overflow-hidden">
                   <Image
-                    src={book.image || "/placeholder.svg"}
+                    src={`${IMAGE}/${book.images[0]}` || "/placeholder.svg"}
                     alt={book.title}
                     fill
                     className="object-cover object-center"
                     sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    priority={book.id <= 4}
+                    // priority={book._id <= 4}
                   />
                 </div>
 
@@ -276,142 +239,9 @@ export default function ProductDetail() {
       {/* Login Modal */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent className="sm:w-[488px] p-0 overflow-hidden lg:px-[40px] lg:py-[80px] bg-[#1E1E1E] dark:bg-[#1E1E1E] text-white border-none">
-          <div className="relative flex flex-col items-center p-6">
-            {/* Close button */}
-            <button
-              onClick={() => setIsModalOpen(false)}
-              className="absolute right-4 top-4 text-gray-400 hover:text-white"
-            >
-          
-            </button>
-
-            {/* Logo */}
-            <div className="flex items-center mb-6">
-        
-              <div className="flex items-center gap-4 mb-4">
-                <Image
-                  className="h-[40px] w-[23px]"
-                  src={"/logo.svg"}
-                  alt="logo"
-                  height={100}
-                  width={100}
-                />
-                <h1 className="lg:text-[24px] text-[18px] font-medium text-[#CAEA31] ">
-                  Angry GPT
-                </h1>
-              </div>
-            </div>
-
-            {/* Login Form */}
-            <form className="w-full space-y-4">
-              <div>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
-                    <Mail className="h-5 w-5 text-[#CAEA31]" />
-                  </div>
-                  <Input
-                    type="email"
-                    placeholder="Enter your email"
-                    className="bg-transparent border-gray-600 text-white placeholder:text-gray-400 pl-10 "
-                  />
-                </div>
-              </div>
-          
-              <div className="relative">
-                <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-[#CAEA31]" />
-                </div>
-                <Input
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Enter your password"
-                  className="bg-transparent border-gray-600 text-white placeholder:text-gray-400 pl-10 pr-10"
-                />
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="sm"
-                  className="absolute inset-y-0 right-0 px-3 flex items-center justify-center hover:bg-transparent focus:ring-0 focus:ring-offset-0"
-                  onClick={togglePasswordVisibility}
-                  aria-label={showPassword ? "Hide password" : "Show password"}
-                >
-                  {showPassword ? (
-                    <EyeOff className="h-5 w-5 text-gray-400 hover:text-white" />
-                  ) : (
-                    <Eye className="h-5 w-5 text-gray-400 hover:text-white" />
-                  )}
-                </Button>
-              </div>
-              <div>
-                <div className="flex justify-end mt-1">
-                  <Link href="/forgotPass" className="text-xs text-[#CAEA31]">
-                    Forgot password?
-                  </Link>
-                </div>
-              </div>
-              <Button
-                type="submit"
-                className="w-full bg-[#CAEA31] hover:bg-[#CAEA31]/90 mt-4 text-black font-medium rounded-full"
-              >
-                Login
-              </Button>
-            </form>
-
-            {/* Divider */}
-            <div className="flex items-center w-full my-4">
-              <div className="flex-grow border-t border-gray-600"></div>
-              <span className="px-3 text-sm text-gray-400">
-                or, continue with
-              </span>
-              <div className="flex-grow border-t border-gray-600"></div>
-            </div>
-
-            {/* Social Login Buttons */}
-            <div className="flex justify-center space-x-4 space-y-4 w-full">
-              <Button
-                variant="outline"
-                size="icon"
-                className="rounded-full border-gray-600 text-white hover:bg-gray-800"
-              >
-                <Image
-                  src="/Google logo.svg"
-                  alt="Google"
-                  width={24}
-                  height={24}
-                />
-                <span className="sr-only">Continue with Google</span>
-              </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                className="rounded-full border-gray-600 text-white hover:bg-gray-800 "
-              >
-                <Image
-                  src="/facebook logo.svg"
-                  alt="Facebook"
-                  width={24}
-                  height={24}
-                  className=""
-                />
-                <span className="sr-only">Continue with Facebook</span>
-              </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                className="rounded-2xl border-gray-600 text-white hover:bg-gray-800 bg-black"
-              >
-                <Image src="/Vector.svg" alt="Apple" width={24} height={24} />
-                <span className="sr-only">Continue with Apple</span>
-              </Button>
-            </div>
-
-            {/* Sign Up Link */}
-            <div className="mt-6 text-sm text-center">
-              <span className="text-gray-400">Dont have an account?</span>{" "}
-              <Link  href="/signUp" className="text-[#CAEA31]">
-                Sign Up
-              </Link>
-            </div>
-          </div>
+          <GoogleOAuthProvider  clientId={process.env.NEXT_PUBLIC_API_KEY_Client_ID || ''}>
+            <Login></Login>
+          </GoogleOAuthProvider>
         </DialogContent>
       </Dialog>
     </div>

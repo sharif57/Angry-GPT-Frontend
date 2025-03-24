@@ -4,8 +4,10 @@ import "../globals.css";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import Navbar from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import Providers from "@/Providers/providers";
+import { ToastContainer } from "react-toastify";
 
-const prompt = Prompt({ subsets: ["latin"], weight: ["400", '500', '700'] });
+const prompt = Prompt({ subsets: ["latin"], weight: ["400", "500", "700"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,16 +22,19 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={prompt.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Navbar></Navbar>
-          {children}
-          <Footer></Footer>
-        </ThemeProvider>
+        <Providers>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Navbar></Navbar>
+            {children}
+            <ToastContainer position="top-center" autoClose={1000} />
+            <Footer></Footer>
+          </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );
