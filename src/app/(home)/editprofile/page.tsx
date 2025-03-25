@@ -282,10 +282,10 @@ export default function EditProfile() {
           />
         </div>
         <div className="space-y-4">
-          <Label>Email</Label>
+          <Label>Email </Label>
           <Input
             placeholder="Enter email"
-            className="dark:border-white border-black py-[10px] text-white placeholder-black dark:placeholder-[#ffffff]"
+            className="dark:border-white border-black py-[10px] text-black dark:text-white placeholder-black dark:placeholder-[#ffffff]"
             defaultValue={user?.email}
             readOnly
           />

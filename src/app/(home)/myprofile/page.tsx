@@ -95,7 +95,7 @@ export default function MyProfile() {
             placeholder="Enter email"
             defaultValue={user?.email}
             readOnly
-            className="dark:border-white border-black py-[10px] text-white placeholder-black dark:placeholder-[#ffffff]"
+            className="dark:border-white border-black py-[10px] text-black dark:text-white placeholder-black dark:placeholder-[#ffffff]"
           />
         </div>
         <Link href={`/editprofile`} className="flex justify-end mt-12">

@@ -2,19 +2,20 @@
 
 import type React from "react";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { MinusIcon, PlusIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import {
   useAllBooksGetQuery,
   useBooksDetailGetQuery,
 } from "@/redux/feature/bookSlice";
 import Login from "@/components/Login";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import { toast } from "react-toastify";
 
 interface Book {
   _id: string;
@@ -29,16 +30,24 @@ interface Book {
   __v: number;
 }
 
+interface User {
+  avatar: string;
+  name: string;
+  email: string;
+  picture: string;
+}
+
 export default function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const params = useParams();
   const id = params?.id;
-  console.log(id, "id");
+  // console.log(id, "id");
+  const router= useRouter()
 
   const { data } = useBooksDetailGetQuery(id);
-  console.log(data?.data, "books");
+  // console.log(data?.data, "books");
   const { data: allBook } = useAllBooksGetQuery({
     limit: 4,
     state: "published",
@@ -60,6 +69,18 @@ export default function ProductDetail() {
   //   setShowPassword(!showPassword);
   // };
 
+
+  const [user, setUser] = useState<User | null>(null);
+  
+    useEffect(() => {
+      // This code will only run on the client side
+      const data = localStorage.getItem("user");
+      if (data) {
+        setUser(JSON.parse(data));
+      }
+    }, []);
+  
+
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number.parseInt(e.target.value);
     if (!isNaN(value) && value > 0) {
@@ -67,14 +88,36 @@ export default function ProductDetail() {
     }
   };
 
+  // const addToCart = () => {
+  //   console.log(`Added ${quantity} item(s) to cart`);
+  //   setIsModalOpen(true);
+  // };
+
+  // const buyNow = () => {
+  //   console.log(`Buying ${quantity} item(s) now`);
+  //   // Here you would implement your checkout functionality
+  // };
   const addToCart = () => {
+    if (!user) {
+      setIsModalOpen(true);
+      return;
+    }
+    
     console.log(`Added ${quantity} item(s) to cart`);
-    setIsModalOpen(true);
+    // Optional: Show success toast
+    toast.success(`${quantity} item(s) added to cart`);
   };
 
+  
   const buyNow = () => {
+    if (!user) {
+      setIsModalOpen(true);
+      return;
+    }
     console.log(`Buying ${quantity} item(s) now`);
-    // Here you would implement your checkout functionality
+    // Optional: Show success toast and redirect to checkout
+    toast.success(`Proceeding to checkout with ${quantity} item(s)`);
+    router.push('/cartpage');
   };
 
   const IMAGE = process.env.NEXT_PUBLIC_API_KEY;
@@ -244,6 +287,7 @@ export default function ProductDetail() {
           </GoogleOAuthProvider>
         </DialogContent>
       </Dialog>
+
     </div>
   );
 }

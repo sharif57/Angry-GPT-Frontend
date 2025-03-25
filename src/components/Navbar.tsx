@@ -179,7 +179,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./ui/theme-toggle";
 import Image from "next/image";
-import { X, Menu } from "lucide-react";
+import { X, Menu, ShoppingCart } from "lucide-react";
 
 interface User {
   avatar: string;
@@ -285,25 +285,32 @@ export default function Navbar() {
         </div>
 
         {/* Actions */}
-        <div className="flex items-center gap-3 justify-between">
-          {user && (
-            <Link href={"/myprofile"}>
-              <Image
-                // src={`${IMAGE}${user?.avatar}` || "/users.svg"}
-                src={` ${IMAGE}${user?.avatar}`.trim()}
-                height={52}
-                width={52}
-                className="size-9 hidden sm:block rounded-full"
-                alt="users"
-              />
-            </Link>
-          )}
+        <div className="flex items-center gap-5 justify-between">
+          {user ? (
+            <>
+              <Link href={"/myprofile"}>
+                <Image
+                  src={` ${IMAGE}${user?.avatar}`.trim()}
+                  height={52}
+                  width={52}
+                  className="size-9 hidden sm:block rounded-full"
+                  alt="users"
+                />
+              </Link>
+              <div className="relative inline-flex items-center justify-center">
+                <ShoppingCart className="h-8 w-8 text-gray-700 dark:text-white" />
+                <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs font-normal text-primary-foreground">
+                  6
+                </span>
+              </div>
+            </>
+          ) : null}
           <ThemeToggle />
-          <Link href={"/cartpage"}>
+          {/* <Link href={"/cartpage"}> */}
             <Button className="rounded-full hidden sm:block bg-[#CAEA31] hover:bg-[#CAEA31] text-[#212121] font-medium">
               Download Now
             </Button>
-          </Link>
+          {/* </Link> */}
         </div>
 
         {/* Mobile Menu Button */}
