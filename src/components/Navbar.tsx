@@ -297,12 +297,12 @@ export default function Navbar() {
                   alt="users"
                 />
               </Link>
-              <div className="relative inline-flex items-center justify-center">
+              <Link href={'/cartpage'} className="relative inline-flex items-center justify-center">
                 <ShoppingCart className="h-8 w-8 text-gray-700 dark:text-white" />
                 <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs font-normal text-primary-foreground">
                   6
                 </span>
-              </div>
+              </Link>
             </>
           ) : null}
           <ThemeToggle />

@@ -16,6 +16,7 @@ import {
 import Login from "@/components/Login";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { toast } from "react-toastify";
+// import { useCheckoutMutation } from "@/redux/feature/addtoCart";
 
 interface Book {
   _id: string;
@@ -44,7 +45,8 @@ export default function ProductDetail() {
   const params = useParams();
   const id = params?.id;
   // console.log(id, "id");
-  const router= useRouter()
+  const router = useRouter();
+  // const [checkout] = useCheckoutMutation();
 
   const { data } = useBooksDetailGetQuery(id);
   // console.log(data?.data, "books");
@@ -69,17 +71,15 @@ export default function ProductDetail() {
   //   setShowPassword(!showPassword);
   // };
 
-
   const [user, setUser] = useState<User | null>(null);
-  
-    useEffect(() => {
-      // This code will only run on the client side
-      const data = localStorage.getItem("user");
-      if (data) {
-        setUser(JSON.parse(data));
-      }
-    }, []);
-  
+
+  useEffect(() => {
+    // This code will only run on the client side
+    const data = localStorage.getItem("user");
+    if (data) {
+      setUser(JSON.parse(data));
+    }
+  }, []);
 
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number.parseInt(e.target.value);
@@ -88,36 +88,61 @@ export default function ProductDetail() {
     }
   };
 
-  // const addToCart = () => {
-  //   console.log(`Added ${quantity} item(s) to cart`);
-  //   setIsModalOpen(true);
-  // };
-
-  // const buyNow = () => {
-  //   console.log(`Buying ${quantity} item(s) now`);
-  //   // Here you would implement your checkout functionality
-  // };
   const addToCart = () => {
     if (!user) {
       setIsModalOpen(true);
       return;
     }
-    
+
     console.log(`Added ${quantity} item(s) to cart`);
     // Optional: Show success toast
     toast.success(`${quantity} item(s) added to cart`);
   };
 
-  
+  // const buyNow = () => {
+  //   if (!user) {
+  //     setIsModalOpen(true);
+  //     return;
+  //   }
+  //   console.log(`Buying ${quantity} item(s) now`);
+  //   // checkout({ method: "credit_card" });
+
+
+
+    
+  //   // Optional: Show success toast and redirect to checkout
+  //   toast.success(`Proceeding to checkout with ${quantity} item(s)`);
+  //   // router.push("/cartpage");
+  // };
+
   const buyNow = () => {
     if (!user) {
       setIsModalOpen(true);
       return;
     }
+    
+    if (!singleBook?._id) {
+      toast.error("Product information is not available");
+      return;
+    }
+  
+    // Create cart item data
+    const cartItems = {
+      productId: singleBook._id,
+      quantity: quantity,
+      price: singleBook.price,
+      title: singleBook.title,
+      author: singleBook.author,
+      image: singleBook.images[0]
+    };
+  
+
+    // Save to localStorage
+    localStorage.setItem('buy', JSON.stringify(cartItems));
+  
     console.log(`Buying ${quantity} item(s) now`);
-    // Optional: Show success toast and redirect to checkout
     toast.success(`Proceeding to checkout with ${quantity} item(s)`);
-    router.push('/cartpage');
+    router.push("/checkOut"); // Redirect to cart page
   };
 
   const IMAGE = process.env.NEXT_PUBLIC_API_KEY;
@@ -282,12 +307,13 @@ export default function ProductDetail() {
       {/* Login Modal */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent className="sm:w-[488px] p-0 overflow-hidden lg:px-[40px] lg:py-[80px] bg-[#1E1E1E] dark:bg-[#1E1E1E] text-white border-none">
-          <GoogleOAuthProvider  clientId={process.env.NEXT_PUBLIC_API_KEY_Client_ID || ''}>
+          <GoogleOAuthProvider
+            clientId={process.env.NEXT_PUBLIC_API_KEY_Client_ID || ""}
+          >
             <Login></Login>
           </GoogleOAuthProvider>
         </DialogContent>
       </Dialog>
-
     </div>
   );
 }

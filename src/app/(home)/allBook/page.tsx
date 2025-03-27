@@ -175,7 +175,7 @@ interface Book {
 
 export default function AllBookStore() {
   const [currentPage, setCurrentPage] = useState(1);
-  const { data } = useAllBooksGetQuery({ limit: 10, state: "published" });
+  const { data } = useAllBooksGetQuery({ limit: 100, state: "published" });
 
   const pagination = data?.meta?.pagination;
   const totalPages = pagination?.totalPage || 1; // Use totalPage from meta.pagination
