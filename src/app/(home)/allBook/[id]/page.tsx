@@ -16,6 +16,7 @@ import {
 import Login from "@/components/Login";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { toast } from "react-toastify";
+import { useAddToCartBookMutation } from "@/redux/feature/addtoCart";
 // import { useCheckoutMutation } from "@/redux/feature/addtoCart";
 
 interface Book {
@@ -48,6 +49,8 @@ export default function ProductDetail() {
   const router = useRouter();
   // const [checkout] = useCheckoutMutation();
 
+  const [addToCartBook] = useAddToCartBookMutation();
+
   const { data } = useBooksDetailGetQuery(id);
   // console.log(data?.data, "books");
   const { data: allBook } = useAllBooksGetQuery({
@@ -64,12 +67,6 @@ export default function ProductDetail() {
   const decrementQuantity = () => {
     setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
   };
-
-  // const [showPassword, setShowPassword] = useState(false);
-
-  // const togglePasswordVisibility = () => {
-  //   setShowPassword(!showPassword);
-  // };
 
   const [user, setUser] = useState<User | null>(null);
 
@@ -94,38 +91,24 @@ export default function ProductDetail() {
       return;
     }
 
+    addToCartBook({ bookId: singleBook._id });
+
     console.log(`Added ${quantity} item(s) to cart`);
     // Optional: Show success toast
     toast.success(`${quantity} item(s) added to cart`);
   };
-
-  // const buyNow = () => {
-  //   if (!user) {
-  //     setIsModalOpen(true);
-  //     return;
-  //   }
-  //   console.log(`Buying ${quantity} item(s) now`);
-  //   // checkout({ method: "credit_card" });
-
-
-
-    
-  //   // Optional: Show success toast and redirect to checkout
-  //   toast.success(`Proceeding to checkout with ${quantity} item(s)`);
-  //   // router.push("/cartpage");
-  // };
 
   const buyNow = () => {
     if (!user) {
       setIsModalOpen(true);
       return;
     }
-    
+
     if (!singleBook?._id) {
       toast.error("Product information is not available");
       return;
     }
-  
+
     // Create cart item data
     const cartItems = {
       productId: singleBook._id,
@@ -133,13 +116,12 @@ export default function ProductDetail() {
       price: singleBook.price,
       title: singleBook.title,
       author: singleBook.author,
-      image: singleBook.images[0]
+      image: singleBook.images[0],
     };
-  
 
     // Save to localStorage
-    localStorage.setItem('buy', JSON.stringify(cartItems));
-  
+    localStorage.setItem("buy", JSON.stringify(cartItems));
+
     console.log(`Buying ${quantity} item(s) now`);
     toast.success(`Proceeding to checkout with ${quantity} item(s)`);
     router.push("/checkOut"); // Redirect to cart page
