@@ -185,12 +185,12 @@ import { useUserCartGetQuery } from "@/redux/feature/addtoCart";
 
 import { useUserProfileGetQuery } from "@/redux/feature/userSlice";
 
-interface User {
-  avatar: string;
-  name: string;
-  email: string;
-  picture: string;
-}
+// interface User {
+//   avatar: string;
+//   name: string;
+//   email: string;
+//   picture: string;
+// }
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

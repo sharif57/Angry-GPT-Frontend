@@ -314,7 +314,6 @@
 //   );
 // }
 
-
 "use client";
 
 import type React from "react";
@@ -323,7 +322,11 @@ import Image from "next/image";
 import { Trash2, Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useAddToCartBookMutation, useRemoveFromCartMutation, useUserCartGetQuery } from "@/redux/feature/addtoCart";
+import {
+  useAddToCartBookMutation,
+  useRemoveFromCartMutation,
+  useUserCartGetQuery,
+} from "@/redux/feature/addtoCart";
 import { toast } from "react-toastify";
 
 // Corrected Cart item type based on your API response
@@ -336,37 +339,30 @@ type CartItem = {
     price: number;
     stock: number;
     images: string[];
-  }
+  };
   quantity: number;
 };
 
 export default function CartPage() {
   const { data: cartData } = useUserCartGetQuery(undefined);
-    const [addToCartBook] = useAddToCartBookMutation();
-  
+  const [addToCartBook] = useAddToCartBookMutation();
 
-  console.log(cartData?.data)
+  console.log(cartData?.data);
 
-  const [removeFromCart] =useRemoveFromCartMutation()
-  
+  const [removeFromCart] = useRemoveFromCartMutation();
+
   // Initialize cart items from API data with quantity
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
-
-  useEffect(()=>{
-    setCartItems(cartData?.data ?? [])
-  },[cartData])
-
-
+  useEffect(() => {
+    setCartItems(cartData?.data ?? []);
+  }, [cartData]);
 
   // Calculate subtotal
   const subtotal = cartItems.reduce(
     (sum, item) => sum + item.book.price * item.quantity,
     0
   );
-
-
-
 
   // Update quantity directly
   const updateQuantity = (id: string, newQuantity: number) => {
@@ -386,7 +382,7 @@ export default function CartPage() {
       setCartItems((prevItems) => prevItems.filter((item) => item._id !== id));
       toast.success(response?.message || "Item removed successfully");
     } catch (error) {
-      console.error('Error removing item:', error);
+      console.error("Error removing item:", error);
       toast.error("Failed to remove item");
     }
   };
@@ -403,8 +399,6 @@ export default function CartPage() {
   };
 
   const IMAGE = process.env.NEXT_PUBLIC_API_KEY;
-
-
 
   return (
     <div className="container mx-auto px-4 sm:px-6 md:px-8 py-4 sm:py-6 md:py-8 min-h-screen mt-6">
@@ -434,7 +428,6 @@ export default function CartPage() {
       {/* Cart Items */}
       <div className="divide-y">
         {cartItems?.map((item) => {
-
           return (
             <div key={item._id} className="py-4 sm:py-6">
               {/* Mobile Layout */}
@@ -442,7 +435,9 @@ export default function CartPage() {
                 <div className="flex gap-4 mb-4">
                   <div className="bg-gray-100 rounded-lg p-2 w-24 h-32 flex items-center justify-center flex-shrink-0">
                     <Image
-                      src={`${IMAGE}${item?.book?.images?.[0] ?? "/placeholder.svg"}` }
+                      src={`${IMAGE}${
+                        item?.book?.images?.[0] ?? "/placeholder.svg"
+                      }`}
                       alt={item.book.title}
                       width={80}
                       height={100}
@@ -483,7 +478,13 @@ export default function CartPage() {
                       variant="ghost"
                       size="sm"
                       className="h-9 w-9 rounded-l-md dark:text-white"
-                      onClick={() => decrementQuantity(item._id)}
+                      // onClick={() => decrementQuantity(item._id)}
+                      onClick={async () => {
+                        await addToCartBook({
+                          bookId: item.book._id,
+                          quantity: Math.max(item.quantity - 1, 1),
+                        }).unwrap();
+                      }}
                       aria-label="Decrease quantity"
                     >
                       <Minus className="h-4 w-4" />
@@ -499,7 +500,16 @@ export default function CartPage() {
                       variant="ghost"
                       size="sm"
                       className="h-9 w-9 rounded-r-md dark:text-white"
-                      onClick={() => incrementQuantity(item._id)}
+                      // onClick={() => incrementQuantity(item._id)}
+                      onClick={async () => {
+                        await addToCartBook({
+                          bookId: item.book._id,
+                          quantity: Math.min(
+                            item.quantity + 1,
+                            item.book.stock
+                          ),
+                        }).unwrap();
+                      }}
                       aria-label="Increase quantity"
                     >
                       <Plus className="h-4 w-4" />
@@ -508,14 +518,15 @@ export default function CartPage() {
                 </div>
               </div>
 
-              
               {/* Tablet and Desktop Layout */}
               <div className="hidden sm:grid grid-cols-12 gap-4 items-center">
                 <div className="col-span-6">
                   <div className="flex gap-4">
                     <div className="bg-gray-100 rounded-lg p-2 w-20 h-28 md:w-24 md:h-32 lg:size-[144px] flex items-center justify-center">
                       <Image
-                        src={`${IMAGE}${item?.book.images?.[0] ?? "/placeholder.svg"}` }
+                        src={`${IMAGE}${
+                          item?.book.images?.[0] ?? "/placeholder.svg"
+                        }`}
                         alt={item.book.title}
                         width={100}
                         height={120}
@@ -542,8 +553,11 @@ export default function CartPage() {
                         variant="ghost"
                         size="sm"
                         className="h-8 w-8 md:h-9 md:w-9"
-                        onClick={async() => {
-                          await addToCartBook({ bookId: item.book._id, quantity: Math.max(item.quantity - 1, 1)  }).unwrap();
+                        onClick={async () => {
+                          await addToCartBook({
+                            bookId: item.book._id,
+                            quantity: Math.max(item.quantity - 1, 1),
+                          }).unwrap();
                         }}
                         aria-label="Decrease quantity"
                       >
@@ -560,8 +574,14 @@ export default function CartPage() {
                         variant="ghost"
                         size="sm"
                         className="h-8 w-8 md:h-9 md:w-9"
-                        onClick={async() => {
-                          await addToCartBook({ bookId: item.book._id, quantity: Math.min(item.quantity + 1, item.book.stock) }).unwrap();
+                        onClick={async () => {
+                          await addToCartBook({
+                            bookId: item.book._id,
+                            quantity: Math.min(
+                              item.quantity + 1,
+                              item.book.stock
+                            ),
+                          }).unwrap();
                         }}
                         aria-label="Increase quantity"
                       >
@@ -587,11 +607,8 @@ export default function CartPage() {
                   </Button>
                 </div>
               </div>
-  
             </div>
-          )
-
-
+          );
         })}
       </div>
 

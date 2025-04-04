@@ -20,12 +20,7 @@ interface CartItem {
   image: string;
 }
 
-interface User {
-  avatar: string;
-  name: string;
-  email: string;
-  picture: string;
-}
+
 
 interface Address {
   country: string;
