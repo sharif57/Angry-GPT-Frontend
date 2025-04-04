@@ -26,20 +26,48 @@ export const checkoutApi = baseApi.injectEndpoints({
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }),
+      invalidatesTags: ["Cart"],
     }),
 
-
-
     addToCartBook: builder.mutation({
-      query: ({ bookId }) => ({
-        url: `/cart/${bookId}/add`,
-        method: "POST",
+      query: ({ bookId, quantity }) => ({
+        url: `/cart/${bookId}?quantity=${quantity}`,
+        method: "PATCH",
         headers: {
-          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          // "Content-Type": "application/json",
         },
       }),
+      invalidatesTags: ["Cart"],
+    }),
+
+    userCartGet: builder.query({
+      query: () => ({
+        url: "/cart",
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }),
+      providesTags: ["Cart"],
+    }),
+
+    removeFromCart: builder.mutation({
+      query: (bookId) => ({
+        url: `/cart/${bookId}/remove`,
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }),
+      invalidatesTags: ["Cart"],
     }),
   }),
 });
 
-export const { useCheckoutBuyMutation, useAddToCartBookMutation } = checkoutApi;
+export const {
+  useCheckoutBuyMutation,
+  useAddToCartBookMutation,
+  useUserCartGetQuery,
+  useRemoveFromCartMutation,
+} = checkoutApi;

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Banner() {
   return (
-    <main id="/" className="  ">
+    <main  className="  ">
       <div className="container mx-auto px-4 py-12 md:py-24">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Content */}

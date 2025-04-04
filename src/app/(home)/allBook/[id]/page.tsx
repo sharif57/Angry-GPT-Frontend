@@ -91,7 +91,7 @@ export default function ProductDetail() {
       return;
     }
 
-    addToCartBook({ bookId: singleBook._id });
+    addToCartBook({ bookId: singleBook._id, quantity }).unwrap();
 
     console.log(`Added ${quantity} item(s) to cart`);
     // Optional: Show success toast
@@ -120,11 +120,12 @@ export default function ProductDetail() {
     };
 
     // Save to localStorage
+
     localStorage.setItem("buy", JSON.stringify(cartItems));
 
     console.log(`Buying ${quantity} item(s) now`);
     toast.success(`Proceeding to checkout with ${quantity} item(s)`);
-    router.push("/checkOut"); // Redirect to cart page
+    router.push("/checkOut");
   };
 
   const IMAGE = process.env.NEXT_PUBLIC_API_KEY;

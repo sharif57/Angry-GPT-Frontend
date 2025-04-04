@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 // "use client";
 
 // import { useState } from "react";
@@ -180,6 +181,9 @@ import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./ui/theme-toggle";
 import Image from "next/image";
 import { X, Menu, ShoppingCart } from "lucide-react";
+import { useUserCartGetQuery } from "@/redux/feature/addtoCart";
+
+import { useUserProfileGetQuery } from "@/redux/feature/userSlice";
 
 interface User {
   avatar: string;
@@ -191,6 +195,16 @@ interface User {
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [, setScrolled] = useState(false);
+  const { data } = useUserCartGetQuery(undefined);
+  // console.log(data)
+
+  const { data: userProfile, refetch } = useUserProfileGetQuery(undefined);
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
+  // console.log(userProfile?.data, "user profile");
+  // console.log(data,'user items')
 
   useEffect(() => {
     const handleScroll = () => {
@@ -215,7 +229,7 @@ export default function Navbar() {
   };
 
   const navLinks = [
-    { name: "Home", href: "/" },
+    // { name: "Home", href: "/" },
     { name: "Feature", href: "feature" },
     { name: "How it Works", href: "works" },
   ];
@@ -223,14 +237,14 @@ export default function Navbar() {
   // const data = localStorage.getItem("user");
   // const user = data ? JSON.parse(data) : null;
 
-  const [user, setUser] = useState<User | null>(null);
+  // const [user, setUser] = useState<User | null>(null);
 
-  useEffect(() => {
-    const data = localStorage.getItem("user");
-    if (data) {
-      setUser(JSON.parse(data));
-    }
-  }, []);
+  // useEffect(() => {
+  //   const data = localStorage.getItem("user");
+  //   if (data) {
+  //     setUser(JSON.parse(data));
+  //   }
+  // }, [refetch]);
 
   const IMAGE = process.env.NEXT_PUBLIC_API_KEY;
 
@@ -256,6 +270,12 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
+            <Link
+              href="/"
+              className="text-[18px] font-medium text-[#4D4D4D] dark:text-[#FFFFFF] hover:text-primary transition-colors"
+            >
+              Home
+            </Link>
             {navLinks.map((link) => (
               <button
                 key={link.name}
@@ -265,6 +285,7 @@ export default function Navbar() {
                 {link.name}
               </button>
             ))}
+
             <Link href="/allBook" className="rounded-full">
               <Button
                 variant="outline"
@@ -286,40 +307,43 @@ export default function Navbar() {
 
         {/* Actions */}
         <div className="flex items-center gap-5 justify-between">
-          {user ? (
+          {userProfile ? (
             <>
               <Link href={"/myprofile"}>
                 <Image
-                  src={` ${IMAGE}${user?.avatar}`.trim()}
+                  src={`${IMAGE}${userProfile?.data?.avatar}`.trim()}
                   height={52}
                   width={52}
                   className="size-9 hidden sm:block rounded-full"
                   alt="users"
                 />
               </Link>
-              <Link href={'/cartpage'} className="relative inline-flex items-center justify-center">
+              <Link
+                href={"/cartpage"}
+                className="relative inline-flex items-center justify-center"
+              >
                 <ShoppingCart className="h-8 w-8 text-gray-700 dark:text-white" />
                 <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs font-normal text-primary-foreground">
-                  6
+                  {data?.data?.length}
                 </span>
               </Link>
             </>
           ) : null}
           <ThemeToggle />
           {/* <Link href={"/cartpage"}> */}
-            <Button className="rounded-full hidden sm:block bg-[#CAEA31] hover:bg-[#CAEA31] text-[#212121] font-medium">
-              Download Now
-            </Button>
+          <Button className="rounded-full hidden sm:block bg-[#CAEA31] hover:bg-[#CAEA31] text-[#212121] font-medium">
+            Download Now
+          </Button>
           {/* </Link> */}
         </div>
 
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center px-4 gap-2">
-          <Image
-            src={"/users.svg"}
+          <img
+            src={`${IMAGE}${userProfile?.data?.avatar}`.trim()}
             height={52}
             width={52}
-            className="size-9"
+            className="size-9 rounded-full"
             alt="users"
           />
           <Button
@@ -363,6 +387,12 @@ export default function Navbar() {
             </Button>
           </div>
           <nav className="mt-6 flex flex-col space-y-4">
+            <Link
+              href="/"
+              className="text-[18px] text-center font-medium text-[#4D4D4D] dark:text-[#FFFFFF] hover:text-primary transition-colors"
+            >
+              Home
+            </Link>
             {navLinks.map((link) => (
               <button
                 key={link.name}

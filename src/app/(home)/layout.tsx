@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import Providers from "@/Providers/providers";
 import { ToastContainer } from "react-toastify";
+import NotifyNotificationChange from "@/Providers/RefecthProvider";
 
 const prompt = Prompt({ subsets: ["latin"], weight: ["400", "500", "700"] });
 
@@ -29,10 +30,12 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <Navbar></Navbar>
-            {children}
-            <ToastContainer position="top-center" autoClose={1000} />
-            <Footer></Footer>
+            <NotifyNotificationChange>
+              <Navbar></Navbar>
+              {children}
+              <ToastContainer position="top-center" autoClose={1000} />
+              <Footer></Footer>
+            </NotifyNotificationChange>
           </ThemeProvider>
         </Providers>
       </body>

@@ -9,7 +9,8 @@ const baseApi = createApi({
   }),
   tagTypes: [
     "Books",
-    "Users"
+    "Users",
+    'Cart'
   ],
   endpoints: () => ({}),
 });
