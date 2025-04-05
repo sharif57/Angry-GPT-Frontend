@@ -72,10 +72,13 @@ export const authApi = baseApi.injectEndpoints({
     }),
 
     facebookLogin: builder.mutation({
-      query: (data) => ({
+      query: ({accessToken}) => ({
         url: "/auth/login/facebook",
         method: "POST",
-        body: data,
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+
       }),
     })
 

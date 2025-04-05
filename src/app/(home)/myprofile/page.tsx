@@ -1,39 +1,31 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useUserProfileGetQuery } from "@/redux/feature/userSlice";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { toast } from "react-toastify";
 
-interface User {
-  avatar: string;
-  name: string;
-  email: string;
-  picture: string;
-}
+// interface User {
+//   avatar: string;
+//   name: string;
+//   email: string;
+//   picture: string;
+// }
 export default function MyProfile() {
-  // const data = localStorage.getItem("user");
-  // const user = data ? JSON.parse(data) : null;
-  // console.log(user);
+
+
+  const { data, refetch } = useUserProfileGetQuery(undefined);
+  console.log(data, "userData");
 
   const router = useRouter();
-  const [user, setUser] = useState<User | null>(null);
-
-  useEffect(() => {
-    // This code will only run on the client side
-    const data = localStorage.getItem("user");
-    if (data) {
-      setUser(JSON.parse(data));
-    }
-  }, []);
 
   const IMAGE = process.env.NEXT_PUBLIC_API_KEY;
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     try {
       // Remove items from localStorage
       localStorage.removeItem("token");
@@ -43,12 +35,12 @@ export default function MyProfile() {
         autoClose: 1000,
       });
       router.push("/");
-
-      // Optional: Redirect to login page or home page
-      // router.push("/login");
     } catch (error) {
       console.error("Error during logout:", error);
       toast.error("Failed to logout properly. Please try again.");
+    }
+    finally{
+      await refetch();
     }
   };
 
@@ -58,7 +50,7 @@ export default function MyProfile() {
       <div className="flex justify-between items-center lg:w-[940px]">
         <div className="flex  items-center gap-4 ">
           <img
-            src={`${IMAGE}${user?.avatar}`}
+            src={`${IMAGE}${data?.data?.avatar}`}
             alt="User Avatar"
             className="rounded-full"
             height={100}
@@ -66,8 +58,8 @@ export default function MyProfile() {
           />
 
           <div>
-            <h1 className="text-[24px] font-medium">{user?.name}</h1>
-            <p>{user?.email}</p>
+            <h1 className="text-[24px] font-medium">{data?.data?.name}</h1>
+            <p>{data?.data?.email}</p>
           </div>
         </div>
         <div>
@@ -86,14 +78,14 @@ export default function MyProfile() {
             placeholder="Enter name"
             readOnly
             className="dark:border-white border-black py-[10px] placeholder-black dark:placeholder-[#ffffff]"
-            defaultValue={user?.name}
+            defaultValue={data?.data?.name}
           />
         </div>
         <div className="space-y-4">
           <Label>Email</Label>
           <Input
             placeholder="Enter email"
-            defaultValue={user?.email}
+            defaultValue={data?.data?.email}
             readOnly
             className="dark:border-white border-black py-[10px] text-black dark:text-white placeholder-black dark:placeholder-[#ffffff]"
           />

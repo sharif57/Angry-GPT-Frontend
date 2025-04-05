@@ -12,7 +12,6 @@ export const userApi = baseApi.injectEndpoints({
         method: "GET",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
-          // "Content-Type": "application/json",
         },
       }),
       providesTags: ["Users"],
@@ -25,7 +24,6 @@ export const userApi = baseApi.injectEndpoints({
         body: updateInfo,
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
-          // "Content-Type": "application/json",
         },
       }),
       invalidatesTags: ["Users"],
@@ -33,4 +31,4 @@ export const userApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useUpdateProfileMutation , useUserProfileGetQuery} = userApi;
+export const { useUpdateProfileMutation, useUserProfileGetQuery } = userApi;

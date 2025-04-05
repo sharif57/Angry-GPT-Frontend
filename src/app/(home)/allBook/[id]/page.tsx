@@ -51,7 +51,7 @@ export default function ProductDetail() {
 
   const [addToCartBook] = useAddToCartBookMutation();
 
-  const { data } = useBooksDetailGetQuery(id);
+  const { data, refetch } = useBooksDetailGetQuery(id);
   // console.log(data?.data, "books");
   const { data: allBook } = useAllBooksGetQuery({
     limit: 4,
@@ -92,6 +92,7 @@ export default function ProductDetail() {
     }
 
     addToCartBook({ bookId: singleBook._id, quantity }).unwrap();
+    refetch();
 
     console.log(`Added ${quantity} item(s) to cart`);
     // Optional: Show success toast
