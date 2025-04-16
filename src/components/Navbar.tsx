@@ -256,15 +256,15 @@ export default function Navbar() {
           <Link href={"/"}>
             <div className="flex items-center gap-4">
               <Image
-                className="h-[40px] w-[23px]"
-                src={"/logo.svg"}
+                className="h-[50px] w-[84px]"
+                src={"/logo.png"}
                 alt="logo"
-                height={100}
-                width={100}
+                height={200}
+                width={300}
               />
-              <h1 className="lg:text-[24px] text-[18px] font-medium text-[#212121] dark:text-white">
+              {/* <h1 className="lg:text-[24px] text-[18px] font-medium text-[#212121] dark:text-white">
                 Angry GPT
-              </h1>
+              </h1> */}
             </div>
           </Link>
 
@@ -367,15 +367,15 @@ export default function Navbar() {
             <Link href={"/"}>
               <div className="flex items-center gap-4">
                 <Image
-                  className="h-[40px] w-[23px]"
-                  src={"/logo.svg"}
+                  className="h-[40px] w-[80px] bg-center"
+                  src={"/logo.png"}
                   alt="logo"
                   height={100}
                   width={100}
                 />
-                <h1 className="lg:text-[24px] text-[18px] font-medium text-[#212121] dark:text-white">
+                {/* <h1 className="lg:text-[24px] text-[18px] font-medium text-[#212121] dark:text-white">
                   Angry GPT
-                </h1>
+                </h1> */}
               </div>
             </Link>
             <Button

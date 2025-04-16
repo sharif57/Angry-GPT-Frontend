@@ -96,7 +96,7 @@ export default function BookStore() {
         {/* Spotify Button */}
         <div className="flex justify-center">
           <a
-            href="https://spotify.com"
+            href="https://feeds.buzzsprout.com/2463868.rss"
             target="_blank"
             rel="noopener noreferrer"
             className="transform hover:scale-105 transition-transform duration-300"
