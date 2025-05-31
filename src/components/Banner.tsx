@@ -61,7 +61,7 @@ export default function Banner() {
           </div>
         </div>
       </div>
-      <div className="absolute inset-0 bg-[url('/Ellipse.png')]  lg:bottom-0 bg-no-repeat lg:bg-right-top  lg:right-0" />
+      <div className="absolute inset-0 bg-[url('/Ellipse.png')]  lg:bottom-0 bg-no-repeat lg:bg-right-top  lg:right-0 -z-30" />
     </main>
   );
 }
