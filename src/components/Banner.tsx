@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Banner() {
   return (
-    <main  className="  ">
+    <main className="  ">
       <div className="container mx-auto px-4 py-12 md:py-24">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Content */}
@@ -51,7 +51,6 @@ export default function Banner() {
             </div>
           </div>
           <div className="relative h-[400px] md:h-[700px]">
-            <div className="absolute inset-0 bg-[url('/Ellipse.png')]  lg:bottom-0 bg-no-repeat lg:bg-right-top -top-64 lg:-right-6" />
             <Image
               src="/mobile2.png"
               alt="Chat Interface"
@@ -62,6 +61,7 @@ export default function Banner() {
           </div>
         </div>
       </div>
+      <div className="absolute inset-0 bg-[url('/Ellipse.png')]  lg:bottom-0 bg-no-repeat lg:bg-right-top  lg:right-0" />
     </main>
   );
 }
